@@ -3,56 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Raport IGFYS Scam</title>
+  <title>Raport IGFYS Scam - Analiză Tehnică Publică</title>
   <style>
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: #f7f9fc;
-      color: #2c3e50;
-      line-height: 1.6;
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
+    :root {
+      --main-bg: #f4f6fa;
+      --main-color: #2c3e50;
+      --accent-color: #005cc5;
+      --warning-bg: #fff3cd;
+      --warning-border: #ffcc00;
+      --code-bg: #eceef0;
     }
+
+    body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background-color: var(--main-bg);
+      color: var(--main-color);
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+      line-height: 1.7;
+    }
+
     h1, h2, h3 {
-      color: #1a1a1a;
       border-bottom: 2px solid #ddd;
       padding-bottom: 0.3rem;
     }
+
+    h1 {
+      font-size: 2rem;
+      color: var(--accent-color);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .section {
+      margin-bottom: 2.5rem;
+    }
+
+    .warning {
+      background-color: var(--warning-bg);
+      padding: 1rem;
+      border-left: 6px solid var(--warning-border);
+      margin: 2rem 0;
+    }
+
+    code {
+      background-color: var(--code-bg);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
     pre {
-      background: #eee;
+      background-color: var(--code-bg);
       padding: 1rem;
       overflow-x: auto;
+      border-radius: 6px;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 1rem 0;
+      margin-top: 1rem;
     }
+
     th, td {
-      border: 1px solid #ccc;
       padding: 0.6rem;
+      border: 1px solid #ccc;
       text-align: left;
+      font-size: 0.95rem;
     }
-    code {
-      background: #eaeaea;
-      padding: 0.2rem 0.4rem;
-      border-radius: 4px;
+
+    th {
+      background: #f0f0f0;
     }
-    .section {
-      margin-bottom: 2rem;
-    }
-    .warning {
-      background: #fff3cd;
-      padding: 1rem;
-      border-left: 6px solid #ffa502;
-      margin: 1rem 0;
+
+    .footer {
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      color: #666;
     }
   </style>
 </head>
 <body>
 
-  <h1>Raport Public — Platformă IGFYS Scam</h1>
+  <h1>🔒 Raport Public: Investigație Platformă IGFYS</h1>
+
+  <div class="section">
+    <h2>📘 Introducere</h2>
+    <p>
+      Acest raport documentează o investigație tehnică realizată asupra unei aplicații Android și a unei platforme web asociate care prezintă multiple semnale de activitate frauduloasă. 
+      Informațiile sunt furnizate publicului și autorităților (ex: <strong>CERT-RO</strong>, <strong>Google</strong>, <strong>Cloudflare</strong>) în scop de avertizare și analiză.
+    </p>
+  </div>
 
   <div class="section">
     <h2>🔍 Rezumat Tehnic</h2>
@@ -61,27 +111,37 @@
       <li><strong>Website principal:</strong> <a href="https://igfys.com">https://igfys.com</a></li>
       <li><strong>IP server:</strong> 176.123.8.37 (AlexHost, Moldova)</li>
       <li><strong>Endpoint API:</strong> <code>https://api.igfys.com/system/info</code></li>
-      <li><strong>Comportament suspect:</strong> încărcare DEX, lipsă autentificare, canale ascunse</li>
+      <li><strong>Comportament suspect:</strong> încărcare dinamică DEX, lipsă autentificare, canale ascunse</li>
     </ul>
   </div>
 
   <div class="section">
-    <h2>🧭 Pași Investigație</h2>
-    <h3>1. Descărcarea și analiza APK</h3>
-    <p>Fișierul `.apk` analizat cu `jadx`. Detectat fișier DEX ascuns: <code>assets/39285EFA.dex</code>.</p>
+    <h2>🧭 Detalii Investigație</h2>
 
-    <h3>2. Analiza rețea</h3>
-    <p>API-ul oferă descărcări directe, fără autentificare. Funcții suspecte de tip „portofel digital”.</p>
+    <h3>1. Descărcare și analiză fișier APK</h3>
+    <p>
+      Aplicația IGF.apk a fost descărcată dintr-o sursă externă (<code>https://igf66.com</code>), în afara magazinului Google Play.
+      În urma analizei cu <code>jadx</code>, s-a identificat un fișier DEX suplimentar ascuns în <code>assets/39285EFA.dex</code>,
+      care nu este menționat în manifest — o tehnică utilizată frecvent în aplicații malițioase.
+    </p>
 
-    <h3>3. Tehnici suspecte</h3>
+    <h3>2. Comportament rețea</h3>
+    <p>
+      Platforma comunică cu serverul <code>https://api.igfys.com/system/info</code> fără autentificare, oferind date despre portofel digital, sume de bani afișate dinamic și opțiuni de tip „investiții rapide”.
+    </p>
+
+    <h3>3. Tehnici suspecte în cod</h3>
     <ul>
-      <li>Cod Java obscurizat, clase generice</li>
-      <li>DexClassLoader + SSLSocketFactory custom</li>
-      <li>Referințe dinamice către platforme externe</li>
+      <li>Obscurare puternică a codului (nume generice de clase și metode)</li>
+      <li>Încărcare de module dinamice cu <code>DexClassLoader</code></li>
+      <li>Folosirea unui <code>SSLSocketFactory</code> custom — potențial pentru interceptare/evitare TLS</li>
+      <li>Referințe externe dinamice (posibil pentru C2 servers sau conținut de phishing)</li>
     </ul>
 
     <h3>4. Infrastructură server</h3>
-    <p>Server AlexHost, domeniu activ cu HTTPS și redirecționare automată.</p>
+    <p>
+      Serverul este găzduit de AlexHost.md — o companie cunoscută pentru acceptarea de conținut nefiltrat, adesea folosită de platforme ilegale sau greu de tras la răspundere.
+    </p>
   </div>
 
   <div class="section warning">
@@ -100,7 +160,28 @@
     </table>
   </div>
 
+  <div class="section">
+    <h2>📤 Recomandări și pași următori</h2>
+    <ul>
+      <li>📩 Raportarea imediată către <strong>CERT-RO</strong> și <strong>CERT-MD</strong></li>
+      <li>📢 Notificarea <strong>Google</strong> privind distribuția APK-ului în afara Play Store</li>
+      <li>🚨 Verificarea implicării unor CDN-uri (ex: <strong>Cloudflare</strong>) pentru eventuale blocări</li>
+      <li>🔍 Investigarea altor domenii/IP-uri care pot fi în rețea cu <code>igfys.com</code></li>
+    </ul>
+  </div>
 
+  <div class="section">
+    <h2>📎 Dovezi disponibile</h2>
+    <p>
+      Pentru capturi de ecran, loguri de rețea, rezultate <code>jadx</code> și extrase din comunicarea HTTPS, puteți accesa arhiva completă în format Markdown sau PDF, la cerere.
+    </p>
+  </div>
+
+  <div class="footer">
+    <p>
+      Ultima actualizare: iulie 2025 • Acest raport este public și poate fi preluat de presă, ONG-uri sau specialiști în securitate. Contact: [email]
+    </p>
+  </div>
 
 </body>
 </html>
