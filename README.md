@@ -13,7 +13,6 @@ Acesta este un raport public privind platforma IGFYS (.apk + website), identific
 - Cod ascuns, încărcare dinamică `.dex`, comunicații fără autentificare
 - Infrastructură suspectă găzduită în Moldova (AlexHost)
 - Indicatori de compromitere (IoCs) documentați
-- Recomandări pentru CERT-RO, Google și Cloudflare
 
 ---
 
