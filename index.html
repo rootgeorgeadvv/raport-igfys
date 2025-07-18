@@ -4,76 +4,140 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Raport IGFYS Scam – Malware Research</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #121212;
-      --surface: #1e1e1e;
-      --text: #e0e0e0;
-      --accent: #bb86fc;
-      --warn: #cf6679;
-      --muted: #888;
-      --code-bg: #272727;
+      --bg: #0d0d0d;
+      --surface: #181818;
+      --text: #eaeaea;
+      --accent: #c084fc;
+      --warn: #f87171;
+      --muted: #9ca3af;
+      --code-bg: #1f1f1f;
       --border: #333;
+      --button-bg: #2d2d2d;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: "Fira Sans", "Segoe UI", sans-serif;
+      font-family: 'Fira Sans', sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding: 1rem;
+      padding: 2rem;
     }
-    header { text-align: center; margin-bottom: 2rem; }
-    header h1 { color: var(--accent); font-size: 2.5rem; }
-    header p { color: var(--muted); margin-top: 0.5rem; }
 
-    nav { text-align: center; margin-bottom: 2rem; }
-    nav a {
-      color: var(--accent); margin: 0 0.5rem;
-      text-decoration: none; font-weight: bold;
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
     }
-    nav a:hover { text-decoration: underline; }
 
-    section { background: var(--surface); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 6px; }
-    .section-title {
-      font-size: 1.5rem;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 0.3rem;
-      margin-bottom: 1rem;
+    header h1 {
+      font-size: 2.8rem;
       color: var(--accent);
     }
 
-    ul, ol { margin-left: 1.2rem; margin-bottom: 1rem; }
-    code { background: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; }
-    pre { background: var(--code-bg); padding: 1rem; overflow-x: auto; border-radius: 6px; margin-bottom: 1rem; }
+    header p {
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    nav a {
+      color: var(--accent);
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      background: var(--surface);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: var(--accent);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    pre, code {
+      font-family: 'Fira Code', monospace;
+      background: var(--code-bg);
+      padding: 0.5rem;
+      border-radius: 6px;
+      display: block;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    ul, ol {
+      padding-left: 1.5rem;
+    }
 
     table {
-      width: 100%; border-collapse: collapse; margin-bottom: 1rem;
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
     }
+
     th, td {
+      padding: 0.6rem;
       border: 1px solid var(--border);
-      padding: 0.6rem; text-align: left;
     }
-    th { background: #2a2a2a; }
+
+    th {
+      background: #2c2c2c;
+      color: var(--accent);
+    }
 
     .warning {
       background: var(--warn);
-      color: #000;
+      color: black;
       padding: 1rem;
-      border-radius: 4px;
-      margin: 1rem 0;
+      border-radius: 6px;
+      margin: 1.5rem 0;
+      font-weight: bold;
+    }
+
+    .btn-link {
+      display: inline-block;
+      background: var(--button-bg);
+      color: var(--accent);
+      padding: 0.6rem 1rem;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn-link:hover {
+      background: var(--accent);
+      color: #000;
     }
 
     .footer {
       text-align: center;
       color: var(--muted);
-      font-size: 0.85rem;
       margin-top: 3rem;
+      font-size: 0.85rem;
     }
 
-    @media (min-width: 600px) {
-      body { padding: 2rem 4rem; }
-      nav a { margin: 0 1rem; }
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
     }
   </style>
 </head>
@@ -81,97 +145,86 @@
 
   <header>
     <h1>🔬 Raport IGFYS Scam</h1>
-    <p>Analiză completă – Android + Infrastructure + IOCs</p>
+    <p>Reverse Engineering • Android APK • Infrastructură suspectă</p>
   </header>
 
   <nav>
-    <a href="#intro">Introducere</a>|<a href="#technical">Detalii Tehnice</a>
-    |<a href="#iocs">Indicatori (IoC)</a>|<a href="#recommendations">Recomandări</a>
+    <a href="#intro">Context</a>
+    <a href="#nontech">Pe scurt</a>
+    <a href="#technical">Tehnic</a>
+    <a href="#iocs">Indicatori</a>
+    <a href="#recommendations">Recomandări</a>
   </nav>
 
   <section id="intro">
-    <div class="section-title">📘 Introducere & Context</div>
-    <p>
-      Platforma IGFYS (apk + website) prezintă semnale de activitate frauduloasă ce combină elemente de phishing, scam financiare și potențiale backdoor‑uri. Acest raport este destinat autorităților (DNSC, CERT-MD), companiilor de securitate și publicului larg interesat de threat intelligence.
-    </p>
-    <p>
-      Se manifestă ca un portofel digital cu opțiuni de investire rapidă, dar ascunde techniques malware-like și comunicații periculoase. Distribuirea în afara Google Play escaladează riscul.
-    </p>
+    <div class="section-title">📘 Context General</div>
+    <p>Am analizat aplicația <code>IGF.apk</code>, promovată ca portofel de investiții. Aplicația conține semnale clare de scam digital și posibile componente malițioase ascunse.</p>
+    <p>Distribuția se face în afara Google Play, iar infrastructura de backend e găzduită pe servere cunoscute pentru tolerarea activităților ilicite.</p>
+  </section>
+
+  <section id="nontech">
+    <div class="section-title">🙋 Explicație Simplă</div>
+    <p><strong>IGFYS</strong> este o platformă falsă care pretinde că oferă câștiguri din investiții rapide, în realitate:</p>
+    <ul>
+      <li>Aplicația nu este verificată de Google sau alte platforme oficiale.</li>
+      <li>Folosește interfețe false pentru a părea legitimă (stil gambling / portofel crypto).</li>
+      <li>Poate colecta date personale, afișa sume false și fura bani la retragere.</li>
+    </ul>
+    <p class="warning">Dacă ai instalat aplicația: dezinstalează, resetează parolele și notifică autoritățile.</p>
+    <a class="btn-link" href="https://rootgeorgeadvv.github.io/raport-igfys/">📄 Vezi raportul complet</a>
   </section>
 
   <section id="technical">
-    <div class="section-title">🔍 Detalii Tehnice Extinse</div>
-
-    <h3>1. Surse & Descărcare APK</h3>
+    <div class="section-title">🔍 Detalii Tehnice</div>
     <ul>
-      <li>Fișierul <code>IGF.apk</code> distribuit prin <a href="https://igf66.com/down/IGF.apk">igf66.com</a>, în afara canalelor oficiale.</li>
-      <li>Analizat cu <code>jadx</code>, evidențiind un DEX ascuns (<code>assets/39285EFA.dex</code>) – indicator malware obișnuit.</li>
+      <li>Aplicația descarcă un DEX ascuns: <code>assets/39285EFA.dex</code></li>
+      <li>Folosește <code>DexClassLoader</code> pentru cod runtime dinamic</li>
+      <li>Endpoint API fără autentificare: <code>/system/info</code></li>
+      <li>Custom SSL (posibil bypass TLS)</li>
+      <li>Server: <code>176.123.8.37</code> → AlexHost.md</li>
     </ul>
-
-    <h3>2. Structura fișierelor</h3>
     <pre>
-/assets/
-  39285EFA.dex  ← cod suplimentar, neatrodat
-/res/
-  values/
-AndroidManifest.xml
-Classes.dex
+GET /system/info HTTP/1.1
+Host: api.igfys.com
+Accept: */*
+...
     </pre>
-    <p><em>DEX neînregistrat = payload dinamic, risc ridicat.</em></p>
-
-    <h3>3. Comportament & API</h3>
-    <ul>
-      <li>Endpoint: <code>https://api.igfys.com/system/info</code> – răspuns JSON cu date de portofel și investiții.</li>
-      <li>Nicio autentificare: poate fi accesat „în gol”, chiar dacă afișează valori financiare.</li>
-      <li>Aplicația prezintă un UI sofisticat, dar fără validare reală în backend.</li>
-    </ul>
-
-    <h3>4. Analiza cod & securitate</h3>
-    <ul>
-      <li>Obfuscate classes & methods – ascund intentul real.</li>
-      <li><code>DexClassLoader</code> pentru încărcare de cod runtime.</li>
-      <li>Custom <code>SSLSocketFactory</code> – bypass TLS valid, potențial intercept TLS (MITM).</li>
-    </ul>
-
-    <h3>5. Infrastructură & hosting</h3>
-    <ul>
-      <li>Server IP: <code>176.123.8.37</code> (AlexHost.md).</li>
-      <li>Domain igfys.com activ, HTTPS valid, cu redirecționare automată pe subdomenii.</li>
-      <li>AlexHost toleră conținut malițios – red flag pentru hosting.</li>
-    </ul>
+    <pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+  "data": {
+    "android_download_url": "https://igf66.com/down/IGF.apk",
+    ...
+  }
+}
+    </pre>
   </section>
 
   <section id="iocs">
-    <div class="section-title">⚠️ Indicatori de Compromitere (IoCs)</div>
+    <div class="section-title">⚠️ Indicatori (IoCs)</div>
     <table>
-      <thead>
-        <tr><th>Tip</th><th>Valoare</th><th>Descriere</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Domeniu</td><td>igfys.com</td><td>Website oficial al platformei</td></tr>
-        <tr><td>IP Server</td><td>176.123.8.37</td><td>Găzduire pe AlexHost.md</td></tr>
-        <tr><td>APK direct</td><td>igf66.com/down/IGF.apk</td><td>Sursa APK neoficială</td></tr>
-        <tr><td>DEX ascuns</td><td>assets/39285EFA.dex</td><td>Payload dynamic</td></tr>
-        <tr><td>Endpoint API</td><td>api.igfys.com/system/info</td><td>Fără autentificare</td></tr>
-      </tbody>
+      <tr><th>Tip</th><th>Valoare</th><th>Descriere</th></tr>
+      <tr><td>Domeniu</td><td>igfys.com</td><td>Website scam</td></tr>
+      <tr><td>APK</td><td>igf66.com</td><td>Surse externe</td></tr>
+      <tr><td>IP</td><td>176.123.8.37</td><td>Hosting suspect</td></tr>
+      <tr><td>DEX</td><td>assets/39285EFA.dex</td><td>Cod ascuns</td></tr>
     </table>
   </section>
 
   <section id="recommendations">
-    <div class="section-title">📤 Recomandări & Pași Următori</div>
+    <div class="section-title">📤 Recomandări</div>
     <ol>
-      <li>🚨 Transmiterea raportului către CERT‑RO și CERT‑MD.</li>
-      <li>📢 Notificare către Google / Play Protect pentru APK distribuit fraudulos.</li>
-      <li>🔒 Verificarea site-urilor CDN (ex: Cloudflare) pentru blocarea domeniului.</li>
-      <li>🕵️‍♂️ Audit complet al infrastructurii: alte domenii/IP conexe.</li>
-      <li>💼 Distribuirea raportului către firme de securitate.</li>
-      <li>📚 Publicarea unui PDF & Markdown complet al dovezilor tehnice.</li>
+      <li>Raportarea aplicației la Google & CERT-RO</li>
+      <li>Blocarea domeniilor din firewall-uri corporate</li>
+      <li>Evitați instalarea de APK-uri din surse necunoscute</li>
+      <li>Distribuiți acest raport public</li>
     </ol>
   </section>
 
   <footer class="footer">
-    <p>Ultima actualizare: 18 iulie 2025 • Raport public, pentru presă, ONG‑uri și comunitatea OSINT. Contact: email@exemplu.com</p>
+    <p>Autor: RootGeorge • Contact: <a href="mailto:rootgeorge2023@gmail.com">rootgeorge2023@gmail.com</a></p>
+    <p>Ultima actualizare: 18 iulie 2025 • Public pentru investigație, media și cercetători OSINT</p>
   </footer>
-
 </body>
 </html>
