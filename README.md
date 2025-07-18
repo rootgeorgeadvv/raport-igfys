@@ -20,7 +20,7 @@ Acesta este un raport public privind platforma IGFYS (.apk + website), identific
 
 Acest repo este destinat:
 - Specialiștilor în securitate
-- Reprezentanților CERT
+- Reprezentanților DNSC
 - Publicului interesat de investigații de tip threat intelligence
 
 📬 Dacă dorești acces la capturi de ecran, loguri sau extrase tehnice, contactează autorul.
