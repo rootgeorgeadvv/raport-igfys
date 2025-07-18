@@ -2,116 +2,159 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Raport IGFYS Scam – Malware Research</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raport IGFYS Scam - Analiză Tehnică Publică</title>
   <style>
     :root {
-      --bg: #121212;
-      --surface: #1e1e1e;
-      --text: #e0e0e0;
-      --accent: #bb86fc;
-      --warn: #cf6679;
-      --muted: #888;
-      --code-bg: #272727;
-      --border: #333;
+      --main-bg: #f4f6fa;
+      --main-color: #2c3e50;
+      --accent-color: #005cc5;
+      --warning-bg: #fff3cd;
+      --warning-border: #ffcc00;
+      --code-bg: #eceef0;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: "Fira Sans", "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding: 1rem;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background-color: var(--main-bg);
+      color: var(--main-color);
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+      line-height: 1.7;
     }
-    header { text-align: center; margin-bottom: 2rem; }
-    header h1 { color: var(--accent); font-size: 2.5rem; }
-    header p { color: var(--muted); margin-top: 0.5rem; }
 
-    nav { text-align: center; margin-bottom: 2rem; }
-    nav a {
-      color: var(--accent); margin: 0 0.5rem;
-      text-decoration: none; font-weight: bold;
-    }
-    nav a:hover { text-decoration: underline; }
-
-    section { background: var(--surface); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 6px; }
-    .section-title {
-      font-size: 1.5rem;
-      border-bottom: 2px solid var(--border);
+    h1, h2, h3 {
+      border-bottom: 2px solid #ddd;
       padding-bottom: 0.3rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
     }
 
-    ul, ol { margin-left: 1.2rem; margin-bottom: 1rem; }
-    code { background: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; }
-    pre { background: var(--code-bg); padding: 1rem; overflow-x: auto; border-radius: 6px; margin-bottom: 1rem; }
+    h1 {
+      font-size: 2rem;
+      color: var(--accent-color);
+    }
 
-    table {
-      width: 100%; border-collapse: collapse; margin-bottom: 1rem;
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
     }
-    th, td {
-      border: 1px solid var(--border);
-      padding: 0.6rem; text-align: left;
+
+    a:hover {
+      text-decoration: underline;
     }
-    th { background: #2a2a2a; }
+
+    .section {
+      margin-bottom: 2.5rem;
+    }
 
     .warning {
-      background: var(--warn);
-      color: #000;
+      background-color: var(--warning-bg);
       padding: 1rem;
+      border-left: 6px solid var(--warning-border);
+      margin: 2rem 0;
+    }
+
+    code {
+      background-color: var(--code-bg);
+      padding: 0.2rem 0.4rem;
       border-radius: 4px;
-      margin: 1rem 0;
+      font-family: monospace;
+    }
+
+    pre {
+      background-color: var(--code-bg);
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    th {
+      background: #f0f0f0;
     }
 
     .footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.85rem;
-      margin-top: 3rem;
-    }
-
-    @media (min-width: 600px) {
-      body { padding: 2rem 4rem; }
-      nav a { margin: 0 1rem; }
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      color: #666;
     }
   </style>
 </head>
 <body>
+  <h1>🔒 Raport Public: Investigație Platformă IGFYS</h1>
 
-  <header>
-    <h1>🔬 Raport IGFYS Scam</h1>
-    <p>Analiză completă – Android + Infrastructure + IOCs</p>
-  </header>
+  <div class="section">
+    <h2>📘 Introducere</h2>
+    <p>Acest raport documentează o investigație tehnică realizată asupra unei aplicații Android și a unei platforme web asociate care prezintă multiple semnale de activitate frauduloasă. Informațiile sunt furnizate publicului și autorităților (ex: <strong>DNSC</strong>, <strong>Google</strong>, <strong>Cloudflare</strong>) în scop de avertizare și analiză.</p>
+  </div>
 
-  <nav>
-    <a href="#intro">Introducere</a>|<a href="#technical">Detalii Tehnice</a>
-    |<a href="#iocs">Indicatori (IoC)</a>|<a href="#recommendations">Recomandări</a>
-  </nav>
+  <div class="section">
+    <h2>🔍 Rezumat Tehnic</h2>
+    <ul>
+      <li><strong>Fișier APK:</strong> <a href="https://igf66.com/down/IGF.apk">https://igf66.com/down/IGF.apk</a></li>
+      <li><strong>Website principal:</strong> <a href="https://igfys.com">https://igfys.com</a></li>
+      <li><strong>IP server:</strong> 176.123.8.37 (AlexHost, Moldova)</li>
+      <li><strong>Endpoint API:</strong> <code>https://api.igfys.com/system/info</code></li>
+      <li><strong>Comportament suspect:</strong> încărcare dinamică DEX, lipsă autentificare, canale ascunse</li>
+    </ul>
+  </div>
 
-  <section id="intro">
-    <div class="section-title">📘 Introducere & Context</div>
-    <p>
-      Platforma IGFYS (apk + website) prezintă semnale de activitate frauduloasă ce combină elemente de phishing, scam financiare și potențiale backdoor‑uri. Acest raport este destinat autorităților (CERT‑RO, CERT‑MD), companiilor de securitate și publicului larg interesat de threat intelligence.
-    </p>
-    <p>
-      Se manifestă ca un portofel digital cu opțiuni de investire rapidă, dar ascunde techniques malware-like și comunicații periculoase. Distribuirea în afara Google Play escaladează riscul.
-    </p>
-  </section>
+  <div class="section">
+    <h2>🧭 Detalii Investigație</h2>
 
-  <section id="technical">
-    <div class="section-title">🔍 Detalii Tehnice Extinse</div>
-     <section id="burp">
-  <div class="section-title">🧪 Simulare Request – Burp Style</div>
+    <h3>1. Descărcare și analiză fișier APK</h3>
+    <p>Aplicația IGF.apk a fost descărcată dintr-o sursă externă (<code>https://igf66.com</code>), în afara magazinului Google Play. În urma analizei cu <code>jadx</code>, s-a identificat un fișier DEX suplimentar ascuns în <code>assets/39285EFA.dex</code>, care nu este menționat în manifest — o tehnică utilizată frecvent în aplicații malițioase.</p>
 
-  <p>Mai jos este o simulare a primului <code>GET /system/info</code> interceptat prin <strong>Burp Suite</strong> în momentul rulării aplicației.</p>
+    <h3>2. Comportament rețea</h3>
+    <p>Platforma comunică cu serverul <code>https://api.igfys.com/system/info</code> fără autentificare, oferind date despre portofel digital, sume de bani afișate dinamic și opțiuni de tip „investiții rapide”.</p>
 
-  <button onclick="toggleBurp()" style="margin: 1rem 0; padding: 0.6rem 1rem; background-color: var(--accent); border: none; border-radius: 6px; color: white; font-weight: bold; cursor: pointer;">📡 Arată Request & Response</button>
+    <h3>3. Tehnici suspecte în cod</h3>
+    <ul>
+      <li>Obscurare puternică a codului (nume generice de clase și metode)</li>
+      <li>Încărcare de module dinamice cu <code>DexClassLoader</code></li>
+      <li>Folosirea unui <code>SSLSocketFactory</code> custom — potențial pentru interceptare/evitare TLS</li>
+      <li>Referințe externe dinamice (posibil pentru C2 servers sau conținut de phishing)</li>
+    </ul>
 
-  <div id="burp-dump" style="display:none;">
-    <h3>📤 HTTP Request</h3>
-    <pre><code>
-GET /system/info HTTP/1.1
+    <h3>4. Infrastructură server</h3>
+    <p>Serverul este găzduit de AlexHost.md — o companie cunoscută pentru acceptarea de conținut nefiltrat, adesea folosită de platforme ilegale sau greu de tras la răspundere.</p>
+  </div>
+
+  <div class="section warning">
+    <h2>⚠️ Indicatori de Compromitere (IoCs)</h2>
+    <table>
+      <thead>
+        <tr><th>Tip</th><th>Valoare</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Domeniu</td><td><code>igfys.com</code></td></tr>
+        <tr><td>IP Server</td><td><code>176.123.8.37</code></td></tr>
+        <tr><td>APK</td><td><a href="https://igf66.com/down/IGF.apk">https://igf66.com/down/IGF.apk</a></td></tr>
+        <tr><td>Endpoint</td><td><code>https://api.igfys.com/system/info</code></td></tr>
+        <tr><td>Host</td><td>AlexHost.md</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <section id="burp">
+    <div class="section-title">🧪 Simulare Request – Burp Style</div>
+    <p>Mai jos este o simulare a primului <code>GET /system/info</code> interceptat prin <strong>Burp Suite</strong> în momentul rulării aplicației.</p>
+    <button onclick="toggleBurp()" style="margin: 1rem 0; padding: 0.6rem 1rem; background-color: var(--accent-color); border: none; border-radius: 6px; color: white; font-weight: bold; cursor: pointer;">📡 Arată Request & Response</button>
+    <div id="burp-dump" style="display:none;">
+      <h3>📤 HTTP Request</h3>
+      <pre><code>GET /system/info HTTP/1.1
 Host: api.igfys.com
 Cache-Control: max-age=0
 Accept-Language: en-US,en;q=0.9
@@ -122,12 +165,10 @@ Accept-Encoding: gzip, deflate, br
 Cookie: think_lang=rou
 If-None-Match: W/"687a4155-538"
 If-Modified-Since: Fri, 18 Jul 2025 12:43:01 GMT
-Connection: keep-alive
-    </code></pre>
+Connection: keep-alive</code></pre>
 
-    <h3>📥 HTTP Response</h3>
-    <pre><code>
-HTTP/1.1 200 OK
+      <h3>📥 HTTP Response</h3>
+      <pre><code>HTTP/1.1 200 OK
 Content-Type: application/json
 Connection: keep-alive
 Date: Fri, 18 Jul 2025 12:44:09 GMT
@@ -145,78 +186,17 @@ X-Amz-Cf-Pop: OTP50-P2
 X-Amz-Cf-Id: 3pEeR4WBHqv0f-w8eqByBGoJQ87PyyKq3LBc28CHcYDQxOnf0lr3pw==
 Content-Length: 1336
 
-{"data":{"android_download_url":"https:\/\/igf66.com\/down\/IGF.apk","ios_download_url":"https:\/\/igf66.com\/down\/IGF.mobileconfig","service_charge":13,"app_version":"1.00","pc_service_url":"https:\/\/chatlink.ichatlink.net\/widget\/standalone.html?eid=c023c18be194fa0cbaf2b9587bab0ced&language=en","mobile_service_url":"https:\/\/chatlink.ichatlink.net\/widget\/standalone.html?eid=c023c18be194fa0cbaf2b9587bab0ced&language=en","web_url":"https:\/\/igfys.com","game_url":"","promotion_code":1,"phone_check":0,"code_check":0,"fund_status":2,"transaction_charge":5,"phone_bind":4,"revoke_order":1,"quick_withdrawal":["100","300","500","1000","5000","10000","30000","50000"],"usdt_quick_withdrawal":["5","10","30","50","100","500","1000"],"quick_recharge":["100","300","500","1000","5000","10000","30000","50000"],"usdt_quick_recharge":["5","10","30","50","100","500","1000"],"detail_notes":[],"saba_check":1,"thirdLoginStatus":"1","shabaStatus":"0","fundStatus":2,"turntableStatus":"1","flyerStatus":0,"update_wpassword":1,"withdrawal_check_type":4,"withdrawal_status":1,"user_bind_type":4,"user_bind_status":0,"bind_card_status":1,"card_number":2,"force_pwd":0,"test_withdraw":1,"vip_apply":0,"open_popup":2,"mail_time":"300","phone_time":"120","match_time_num":0,"lang_debug":2,"force_real_name_open":2,"is_agent_reward":0},"code":1}
-    </code></pre>
+{"data":{"android_download_url":"https:\/\/igf66.com\/down\/IGF.apk", ... },"code":1}</code></pre>
+    </div>
+    <script>
+      function toggleBurp() {
+        const el = document.getElementById("burp-dump");
+        el.style.display = el.style.display === "none" ? "block" : "none";
+      }
+    </script>
+  </section>
+
+  <div class="footer">
   </div>
-
-  <script>
-    function toggleBurp() {
-      const el = document.getElementById("burp-dump");
-      el.style.display = el.style.display === "none" ? "block" : "none";
-    }
-  </script>
-</section>
-
-    <h3>1. Surse & Descărcare APK</h3>
-    <ul>
-      <li>Fișierul <code>IGF.apk</code> distribuit prin <a href="https://igf66.com/down/IGF.apk">igf66.com</a>, în afara canalelor oficiale.</li>
-      <li>Analizat cu <code>jadx</code>, evidențiind un DEX ascuns (<code>assets/39285EFA.dex</code>) – indicator malware obișnuit.</li>
-    </ul>
-
-    <h3>2. Structura fișierelor</h3>
-    <pre>
-/assets/
-  39285EFA.dex  ← cod suplimentar, neatrodat
-/res/
-  values/
-AndroidManifest.xml
-Classes.dex
-    </pre>
-    <p><em>DEX neînregistrat = payload dinamic, risc ridicat.</em></p>
-
-    <h3>3. Comportament & API</h3>
-    <ul>
-      <li>Endpoint: <code>https://api.igfys.com/system/info</code> – răspuns JSON cu date de portofel și investiții.</li>
-      <li>Nicio autentificare: poate fi accesat „în gol”, chiar dacă afișează valori financiare.</li>
-      <li>Aplicația prezintă un UI sofisticat, dar fără validare reală în backend.</li>
-    </ul>
-
-    <h3>4. Analiza cod & securitate</h3>
-    <ul>
-      <li>Obfuscate classes & methods – ascund intentul real.</li>
-      <li><code>DexClassLoader</code> pentru încărcare de cod runtime.</li>
-      <li>Custom <code>SSLSocketFactory</code> – bypass TLS valid, potențial intercept TLS (MITM).</li>
-    </ul>
-
-    <h3>5. Infrastructură & hosting</h3>
-    <ul>
-      <li>Server IP: <code>176.123.8.37</code> (AlexHost.md).</li>
-      <li>Domain igfys.com activ, HTTPS valid, cu redirecționare automată pe subdomenii.</li>
-      <li>AlexHost toleră conținut malițios – red flag pentru hosting.</li>
-    </ul>
-  </section>
-
-  <section id="iocs">
-    <div class="section-title">⚠️ Indicatori de Compromitere (IoCs)</div>
-    <table>
-      <thead>
-        <tr><th>Tip</th><th>Valoare</th><th>Descriere</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Domeniu</td><td>igfys.com</td><td>Website oficial al platformei</td></tr>
-        <tr><td>IP Server</td><td>176.123.8.37</td><td>Găzduire pe AlexHost.md</td></tr>
-        <tr><td>APK direct</td><td>igf66.com/down/IGF.apk</td><td>Sursa APK neoficială</td></tr>
-        <tr><td>DEX ascuns</td><td>assets/39285EFA.dex</td><td>Payload dynamic</td></tr>
-        <tr><td>Endpoint API</td><td>api.igfys.com/system/info</td><td>Fără autentificare</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-
-
-  <footer class="footer">
-    <p>Ultima actualizare: 18 iulie 2025 • Raport public, pentru presă, ONG‑uri și comunitatea OSINT. Contact: email@exemplu.com</p>
-  </footer>
-
 </body>
 </html>
