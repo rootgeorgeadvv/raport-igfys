@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Raport IGFYS Scam</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f7f9fc;
+      color: #2c3e50;
+      line-height: 1.6;
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1, h2, h3 {
+      color: #1a1a1a;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.6rem;
+      text-align: left;
+    }
+    code {
+      background: #eaeaea;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    .warning {
+      background: #fff3cd;
+      padding: 1rem;
+      border-left: 6px solid #ffa502;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Raport Public — Platformă IGFYS Scam</h1>
+
+  <div class="section">
+    <h2>🔍 Rezumat Tehnic</h2>
+    <ul>
+      <li><strong>Fișier APK:</strong> <a href="https://igf66.com/down/IGF.apk">https://igf66.com/down/IGF.apk</a></li>
+      <li><strong>Website principal:</strong> <a href="https://igfys.com">https://igfys.com</a></li>
+      <li><strong>IP server:</strong> 176.123.8.37 (AlexHost, Moldova)</li>
+      <li><strong>Endpoint API:</strong> <code>https://api.igfys.com/system/info</code></li>
+      <li><strong>Comportament suspect:</strong> încărcare DEX, lipsă autentificare, canale ascunse</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>🧭 Pași Investigație</h2>
+    <h3>1. Descărcarea și analiza APK</h3>
+    <p>Fișierul `.apk` analizat cu `jadx`. Detectat fișier DEX ascuns: <code>assets/39285EFA.dex</code>.</p>
+
+    <h3>2. Analiza rețea</h3>
+    <p>API-ul oferă descărcări directe, fără autentificare. Funcții suspecte de tip „portofel digital”.</p>
+
+    <h3>3. Tehnici suspecte</h3>
+    <ul>
+      <li>Cod Java obscurizat, clase generice</li>
+      <li>DexClassLoader + SSLSocketFactory custom</li>
+      <li>Referințe dinamice către platforme externe</li>
+    </ul>
+
+    <h3>4. Infrastructură server</h3>
+    <p>Server AlexHost, domeniu activ cu HTTPS și redirecționare automată.</p>
+  </div>
+
+  <div class="section warning">
+    <h2>⚠️ Indicatori de Compromitere (IoCs)</h2>
+    <table>
+      <thead>
+        <tr><th>Tip</th><th>Valoare</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Domeniu</td><td><code>igfys.com</code></td></tr>
+        <tr><td>IP Server</td><td><code>176.123.8.37</code></td></tr>
+        <tr><td>APK</td><td><a href="https://igf66.com/down/IGF.apk">https://igf66.com/down/IGF.apk</a></td></tr>
+        <tr><td>Endpoint</td><td><code>https://api.igfys.com/system/info</code></td></tr>
+        <tr><td>Host</td><td>AlexHost.md</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+</body>
+</html>
